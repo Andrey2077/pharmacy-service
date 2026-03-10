@@ -1,0 +1,57 @@
+databaseChangeLog:
+  - changeSet:
+      id: 3
+      author: kotov
+      preConditions:
+        - onFail: MARK_RAN
+        - not:
+            - tableExists:
+                tableName: pharmacy
+      changes:
+        - createTable:
+            tableName: pharmacy
+            columns:
+              - column:
+                  name: id
+                  type: BIGINT
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+              - column:
+                  name: pharmacy_chain_id
+                  type: BIGINT
+              - column:
+                  name: address
+                  type: varchar(255)
+              - column:
+                  name: name
+                  type: varchar(64)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: inn
+                  type: bigint
+                  constraints:
+                    nullable: false
+              - column:
+                  name: category
+                  type: varchar(5)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: juridical_form
+                  type: varchar(8)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: staff_count
+                  type: int
+        - addForeignKeyConstraint:
+            baseTableName: pharmacy
+            baseColumnNames: pharmacy_chain_id
+            referencedTableName: pharmacy_chain
+            referencedColumnNames: id
+            constraintName: fk_pharmacy_chain
+      rollback:
+        - dropTable:
+            tableName: pharmacy

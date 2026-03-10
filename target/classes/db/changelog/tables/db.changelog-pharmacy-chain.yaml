@@ -1,0 +1,46 @@
+databaseChangeLog:
+  - changeSet:
+      id: 2
+      author: kotov
+      preConditions:
+        - onFail: MARK_RAN
+        - not:
+            - tableExists:
+                tableName: pharmacy_chain
+      changes:
+        - createTable:
+            tableName: pharmacy_chain
+            columns:
+              - column:
+                  name: id
+                  type: BIGINT
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+              - column:
+                  name: juridical_address
+                  type: varchar(255)
+              - column:
+                  name: locale
+                  type: boolean
+                  defaultValueBoolean: false
+                  constraints:
+                    nullable: false
+              - column:
+                  name: short_name
+                  type: varchar(32)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: juridical_name
+                  type: varchar(64)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: juridical_form
+                  type: varchar(8)
+                  constraints:
+                    nullable: false
+      rollback:
+        - dropTable:
+            tableName: pharmacy_chain
