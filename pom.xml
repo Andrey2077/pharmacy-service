@@ -9,7 +9,7 @@
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
     <groupId>org.example.pharmacy</groupId>
-    <artifactId>pharmacy</artifactId>
+    <artifactId>pharmacy-service</artifactId>
     <packaging>war</packaging>
     <version>1.0</version>
     <name>pharmacy Maven Webapp</name>
